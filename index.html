@@ -182,12 +182,14 @@
   flex-direction: column;
   align-items: center;
   position: fixed;
-  top: 60px;
+  top: 4rem;
   left: 0;
   right: 0;
   background: #000;
-  padding: 1rem;
-  z-index: 999;
+  padding: 1rem 0.5rem;
+  z-index: 1002;
+  box-shadow: 0 8px 20px rgba(0, 255, 255, 0.15);
+  border-bottom: 1px solid var(--accent-color);
 }
   }
   #burger-toggle {
@@ -467,6 +469,9 @@ document.addEventListener('DOMContentLoaded', () => {
   <div id="particles-js"></div>
 
   <nav id="mainNav">
+    <button id="burger-toggle" style="display: none; position: fixed; top: 1rem; right: 1rem; background: none; border: none; color: var(--accent-color); font-size: 2rem; z-index: 1001; cursor: pointer;">
+    ☰
+    </button>
     <a href="#top" style="margin-right:auto; font-family: 'Orbitron', sans-serif; font-size: 2rem; color: var(--accent-color); text-decoration: none; font-weight: bold; transition: text-shadow 0.3s ease, transform 0.3s ease;" class="glitch-text hover-bounce">UrbanTekk</a>
     <a href="#lineup">Kommendes Event</a>
     <a href="#about">Über Uns</a>
@@ -475,10 +480,6 @@ document.addEventListener('DOMContentLoaded', () => {
     <a href="#social">Soziale Medien</a>
     <a href="mailto:urbantekk@gmx.at" class="nav-cta" style="font-size: 0.85rem; padding: 0.45rem 1rem; line-height: 1; display: flex; align-items: center; justify-content: center;">Direkt Anfrage Email</a>
   </nav>
-
-  <button id="burger-toggle" style="display: none; position: fixed; top: 1rem; right: 1rem; background: none; border: none; color: var(--accent-color); font-size: 2rem; z-index: 1001; cursor: pointer;">
-  ☰
-</button>
 
   <footer id="pageFooter" style="position: fixed; bottom: 0; left: 0; right: 0; background: #000; padding: 0.5rem 1rem; text-align: center; z-index: 1000; color: var(--muted-color); transition: transform 0.6s ease;">
   
@@ -929,3 +930,5 @@ navElement.querySelectorAll('a').forEach(link => {
 
 
 </script>
+
+$1
