@@ -1,0 +1,6 @@
+# UrbanTekk – robots.txt
+User-agent: *
+Disallow:
+
+# Sitemap (optional – wenn du eine sitemap.xml erstellst)
+Sitemap: https://urbantekk.github.io/website/sitemap.xml
