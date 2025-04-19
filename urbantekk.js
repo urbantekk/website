@@ -90,7 +90,7 @@ document.querySelectorAll('section').forEach(el => {
     script.onload = () => {
       particlesJS('particles-js', {
         particles: {
-          number: { value: 20 },
+          number: { value: 120 },
           size: { value: 2 },
           color: { value: ['#ffffff', '#00ffff', '#ff007f'] },
           opacity: {
