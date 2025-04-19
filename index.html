@@ -169,6 +169,34 @@
     color: #000;
     box-shadow: 0 0 12px var(--primary-color);
   }
+  @media (max-width: 768px) {
+    nav {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      background: #000;
+      padding: 1rem;
+    }
+    nav.open {
+      display: flex;
+      position: fixed;
+      top: 60px;
+      left: 0;
+      right: 0;
+      z-index: 999;
+    }
+  }
+  #burger-toggle {
+  display: none;
+}
+@media (max-width: 768px) {
+  #burger-toggle {
+    display: none;
+  }
+  body:not(.header-visible) #burger-toggle {
+    display: block;
+  }
+}
   footer {
     border-top: 1px solid var(--accent-color);
     box-shadow: 0 -4px 20px rgba(0,255,255,0.1);
@@ -443,6 +471,10 @@ document.addEventListener('DOMContentLoaded', () => {
     <a href="#social">Soziale Medien</a>
     <a href="mailto:urbantekk@gmx.at" class="nav-cta" style="font-size: 0.85rem; padding: 0.45rem 1rem; line-height: 1; display: flex; align-items: center; justify-content: center;">Direkt Anfrage Email</a>
   </nav>
+
+  <button id="burger-toggle" style="display: none; position: fixed; top: 1rem; right: 1rem; background: none; border: none; color: var(--accent-color); font-size: 2rem; z-index: 1001; cursor: pointer;">
+  ☰
+</button>
 
   <footer id="pageFooter" style="position: fixed; bottom: 0; left: 0; right: 0; background: #000; padding: 0.5rem 1rem; text-align: center; z-index: 1000; color: var(--muted-color); transition: transform 0.6s ease;">
   
@@ -858,7 +890,31 @@ document.addEventListener('DOMContentLoaded', () => {
       if (banner) banner.style.display = 'none';
     });
   }
+
+  // Burger-Menü nur sichtbar nach Header
+const burgerToggle = document.getElementById('burger-toggle');
+const navElement = document.getElementById('mainNav');
+const headerElement = document.querySelector('header');
+
+if (burgerToggle && navElement && headerElement) {
+  const burgerObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      // Nur auf kleinen Bildschirmen (max-width: 768px)
+      if (window.innerWidth <= 768) {
+        burgerToggle.style.display = entry.isIntersecting ? 'none' : 'block';
+      } else {
+        burgerToggle.style.display = 'none';
+      }
+    });
+  }, { threshold: 0.1 });
+  burgerObserver.observe(headerElement);
+
+  burgerToggle.addEventListener('click', () => {
+    navElement.classList.toggle('open');
+  });
+}
+
+
 </script>
 
 $1
-
