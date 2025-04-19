@@ -490,15 +490,17 @@ section.visible {
 }
 
 .glitch-logo {
-  animation: glitchLogo 1.5s infinite steps(1, end);
-  filter: invert(1) drop-shadow(0 0 8px var(--accent-color));
+  position: relative;
+  animation: glitchLogo 1.2s infinite steps(1, end);
+  filter: invert(1) drop-shadow(0 0 6px var(--accent-color));
 }
 
 @keyframes glitchLogo {
-  0% { transform: translate(0, 0); }
-  20% { transform: translate(-1px, 1px); }
-  40% { transform: translate(2px, -1px); }
-  60% { transform: translate(-3px, 2px); }
-  80% { transform: translate(1px, -1px); }
-  100% { transform: translate(0, 0); }
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px) skew(-2deg); }
+  40% { transform: translate(2px, -1px) skew(2deg); }
+  60% { transform: translate(-1px, 2px) skew(-1deg); }
+  80% { transform: translate(2px, 0px) skew(1deg); }
+  100% { transform: translate(0); }
 }
+
