@@ -462,3 +462,13 @@
     0% { opacity: 0; transform: scale(0.95); }
     100% { opacity: 1; transform: scale(1); }
   }
+
+body.club-mode {
+  background-color: black;
+  --accent-color: #ff00ff;
+  --primary-color: #00ffff;
+}
+
+body.club-mode .animated-icon {
+  stroke: var(--primary-color);
+}
