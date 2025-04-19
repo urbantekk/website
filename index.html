@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="UrbanTekk liefert kompromisslosen Bass, Eventtechnik und DJ-Sets mit Persönlichkeit. Hart. Laut. Echt.">
+  <meta name="keywords" content="HardTekk, DJ, Eventtechnik, UrbanTekk, Bass, Veranstaltungen, Tekkno">
+  <meta name="author" content="UrbanTekk">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://urbantekk.at">
+  <meta property="og:title" content="UrbanTekk – HardTekk & Eventtechnik">
+  <meta property="og:description" content="Kompromissloser Sound, Live-Events und Technik für dein perfektes Tekk-Erlebnis.">
+  <meta property="og:image" content="https://i.imgur.com/7j1T1U2.png">
+  
+<style>
+  /* ================================ */
+  /* 🔧 Root & Reset                 */
+  /* ================================ */
+  :root {
+    --primary-color: #ff007f;
+    --accent-color: #00ffff;
+    --bg-color: #0a0a0a;
+    --text-color: #fff;
+    --muted-color: #999;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  /* ================================ */
+  /* 🎛️ Header                       */
+  /* ================================ */
+  header {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    background: url('https://images.unsplash.com/photo-1618379349570-c6f366f45e7a?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+  }
+  .logo-parallax {
+    max-width: 25vw;
+    filter: invert(1);
+    z-index: 2;
+    transition: transform 0.1s ease;
+    position: relative;
+    animation: logoFlash 4s infinite ease-in-out, flickerScan 0.15s infinite;
+  }
+  .header-glow {
+    position: absolute;
+    width: 60vw;
+    height: 60vw;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%);
+    opacity: 0.05;
+    z-index: 0;
+    filter: blur(60px);
+    animation: glowPulse 5s infinite ease-in-out;
+  }
+  .slogan-container {
+    margin-top: 1rem;
+    z-index: 2;
+    position: relative;
+  }
+  .slogan {
+    font-size: 1.5rem;
+    color: var(--muted-color);
+    opacity: 1;
+    text-align: center;
+    font-style: italic;
+    transition: opacity 0.5s ease;
+  }
+
+  /* ================================ */
+  /* 🔦 Glitch & Visual FX           */
+  /* ================================ */
+  #glitch-flash {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: white;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transition: opacity 0.1s;
+  }
+  #noise, #particles-js {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+  }
+  #noise {
+    background: url('https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif') repeat;
+    background-size: cover;
+    mix-blend-mode: overlay;
+    opacity: 0.04;
+  }
+
+  /* ================================ */
+  /* 🧭 Navigation & Footer          */
+  /* ================================ */
+  nav {
+    position: fixed;
+    top: -100px;
+    left: 0;
+    right: 0;
+    background: #000;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--accent-color);
+    box-shadow: 0 4px 20px rgba(0,255,255,0.1);
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 1rem;
+    z-index: 1000;
+    transition: top 0.3s ease;
+  }
+  nav.sticky { top: 0; }
+  nav a {
+    position: relative;
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+  nav a:hover { color: var(--primary-color); }
+  nav a::after {
+    content: '';
+    position: absolute;
+    width: 0%; height: 2px; bottom: -4px; left: 0;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+  }
+  nav a:hover::after { width: 100%; }
+  nav a.active {
+    color: var(--primary-color);
+    font-weight: bolder;
+  }
+  nav a.glitch {
+    display: inline-block;
+    animation: glitchText 1.2s infinite;
+  }
+  .nav-cta {
+    padding: 0.5rem 1.2rem;
+    margin-left: 0.5rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 6px;
+    color: var(--primary-color);
+    background-color: transparent;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+  }
+  .nav-cta:hover {
+    background-color: var(--primary-color);
+    color: #000;
+    box-shadow: 0 0 12px var(--primary-color);
+  }
+  footer {
+    border-top: 1px solid var(--accent-color);
+    box-shadow: 0 -4px 20px rgba(0,255,255,0.1);
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: #000;
+    padding: 1rem;
+    text-align: center;
+    z-index: 1000;
+    color: var(--muted-color);
+    transform: translateY(100%);
+    transition: transform 0.6s ease;
+  }
+  footer.visible { transform: translateY(0); }
+
+  /* ================================ */
+  /* 💎 Components                   */
+  /* ================================ */
+  .service-box {
+    background: #111;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(255,255,255,0.05);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    will-change: transform;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .service-box:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 0 25px rgba(0,255,255,0.3);
+  }
+  .parallax-scroll {
+    transform: translateY(0);
+    transition: transform 0.6s ease-out;
+  }
+  .parallax-scroll.visible {
+    transform: translateY(-10px);
+  }
+  .glitch-text {
+    position: relative;
+    display: inline-block;
+    animation: glitchText 1.2s infinite;
+    z-index: 1001;
+  }
+  .hover-bounce:hover {
+    text-shadow: 0 0 12px var(--primary-color);
+    animation: bounce 0.4s ease;
+  }
+
+  /* ================================ */
+  /* 📺 Animation Keyframes          */
+  /* ================================ */
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
+  }
+  @keyframes glowPulse {
+    0%, 100% { opacity: 0.1; transform: scale(1); }
+    50% { opacity: 0.25; transform: scale(1.05); }
+  }
+  @keyframes glitchText {
+    0% { text-shadow: 1px 0 red, -1px 0 blue; }
+    20% { text-shadow: 2px 2px #00ffff, -2px -2px #ff007f; }
+    40% { text-shadow: -1px 0 #ff007f, 1px 0 #00ffff; }
+    60% { text-shadow: 0 0 2px #fff; }
+    80% { text-shadow: 1px 0 red, -1px 0 blue; }
+    100% { text-shadow: none; }
+  }
+  @keyframes logoFlash {
+    0%, 100% { filter: invert(1) drop-shadow(0 0 12px var(--accent-color)); }
+    50% { filter: invert(1) drop-shadow(0 0 20px var(--primary-color)); }
+  }
+  @keyframes flickerScan {
+    0% { opacity: 0.95; transform: scaleY(1); }
+    5% { opacity: 0.8; transform: scaleY(1.02); }
+    10% { opacity: 0.9; transform: scaleY(1); }
+    15% { opacity: 0.7; transform: scaleY(1.03); }
+    20%, 100% { opacity: 1; transform: scaleY(1); }
+  }
+
+  /* ================================ */
+  /* 🎛️ Live-Banner                 */
+  /* ================================ */
+  .live-banner {
+    position: absolute;
+    top: 1.2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid var(--accent-color);
+    border-radius: 8px;
+    padding: 1rem 2rem;
+    min-width: 60vw;
+    z-index: 2000;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--accent-color);
+    text-align: center;
+    text-shadow: 0 0 6px var(--accent-color), 0 0 12px var(--primary-color);
+  }
+  .live-banner .live-text {
+    margin: 0;
+    padding: 0;
+    line-height: 1.4;
+  }
+  
+
+  /* ================================ */
+  /* 📱 Responsive (Mobile Ready)    */
+  /* ================================ */
+  @media (max-width: 768px) {
+    header {
+      height: auto;
+      padding: 5rem 1rem 3rem 1rem;
+    }
+    .logo-parallax {
+      max-width: 85vw;
+    }
+    .slogan {
+      font-size: 1.3rem;
+      color: var(--accent-color);
+      text-shadow: 0 0 6px var(--primary-color);
+    }
+    .live-banner {
+      min-width: 95vw;
+      font-size: 1.3rem;
+      padding: 1.4rem 1.2rem;
+      text-align: center;
+      line-height: 1.6;
+    }
+    header {
+      height: 120vh;
+      padding-top: 2rem;
+    }
+    .live-banner {
+      min-width: 95vw;
+      font-size: 1.1rem;
+      padding: 1rem 1.2rem;
+    }
+    .logo-parallax {
+      max-width: 70vw;
+    }
+    nav {
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 0.8rem 1rem;
+    }
+    nav a {
+      font-size: 0.9rem;
+    }
+    .nav-cta {
+      margin-left: 0;
+      width: 100%;
+      justify-content: center;
+    }
+    .logo-parallax {
+      max-width: 60vw;
+    }
+    .slogan {
+      font-size: 1.1rem;
+      padding: 0 1rem;
+    }
+    .live-banner {
+      min-width: 90vw;
+      font-size: 0.9rem;
+      padding: 0.8rem 1rem;
+    }
+    section {
+      padding: 4rem 1rem;
+    }
+    .about-parallax-box,
+    .contact-box {
+      padding: 2rem 1.2rem;
+    }
+    .service-box {
+      padding: 1.5rem 1rem;
+    }
+    .service-box h3 {
+      font-size: 1.1rem;
+    }
+    .service-box p {
+      font-size: 0.9rem;
+    }
+    footer p {
+      font-size: 0.75rem;
+    }
+    #lineup div {
+      flex-direction: column !important;
+      align-items: center;
+    }
+    #lineup img {
+      max-width: 90vw !important;
+    }
+  }
+</style>
+</head>
+  <div id="loader" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:#000; display:flex; align-items:center; justify-content:center; z-index:10000;">
+    <div style="font-family:'Orbitron',sans-serif; font-size:2rem; color:var(--accent-color); text-align:center;">
+      UrbanTekk lädt...
+    </div>
+  </div>
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const loader = document.getElementById('loader');
+  loader.style.transition = 'opacity 0.6s ease';
+  loader.style.opacity = '0';
+  setTimeout(() => loader.style.display = 'none', 600);
+});
+</script>
+  <audio id="hover-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-click-error-1110.mp3" preload="auto"></audio>
+  <div id="glitch-flash"></div>
+  <div id="noise"></div>
+  <div id="particles-js"></div>
+
+  <nav id="mainNav">
+    <a href="#top" style="margin-right:auto; font-family: 'Orbitron', sans-serif; font-size: 2rem; color: var(--accent-color); text-decoration: none; font-weight: bold; transition: text-shadow 0.3s ease, transform 0.3s ease;" class="glitch-text hover-bounce">UrbanTekk</a>
+    <a href="#lineup">Kommendes Event</a>
+    <a href="#about">Über Uns</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Anfrage & Booking</a>
+    <a href="#social">Soziale Medien</a>
+    <a href="mailto:urbantekk@gmx.at" class="nav-cta" style="font-size: 0.85rem; padding: 0.45rem 1rem; line-height: 1; display: flex; align-items: center; justify-content: center;">Direkt Anfrage Email</a>
+  </nav>
+
+  <footer id="pageFooter" style="position: fixed; bottom: 0; left: 0; right: 0; background: #000; padding: 0.5rem 1rem; text-align: center; z-index: 1000; color: var(--muted-color); transition: transform 0.6s ease;">
+  
+  <p style="margin: 0; font-size: 0.9rem; letter-spacing: 0.5px;">
+    &copy; 2025 UrbanTekk · <a href="#" style="color: var(--primary-color); text-decoration: none;">Impressum</a> · <a href="#" style="color: var(--primary-color); text-decoration: none;">Datenschutz</a>
+  </p>
+
+</footer>
+
+  <header>
+  <div class="logo-burst"></div>
+    
+    <div class="live-banner">
+  <marquee behavior="scroll" direction="left" scrollamount="6" class="live-text">
+    🎧 Nächster Auftritt: 03.05. – SchranzTekk // N1-EventClub Leibnitz/Gralla // ab 21:00 Uhr 🎧
+  </marquee>
+  <div id="countdown" style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--muted-color); text-shadow: none;"></div>
+</div>
+    
+    <div class="header-glow"></div>
+    
+    <img src="https://i.imgur.com/7j1T1U2.png" alt="UrbanTekk Logo" class="logo-parallax logo-glow" style="max-width: 32vw; filter: invert(1) drop-shadow(0 0 6px var(--accent-color)); animation: logoFlash 4s infinite ease-in-out;">
+    
+    <div class="slogan-container">
+      <p class="slogan" id="active-slogan">HardTekk. Laut. Echt. UrbanTekk.</p>
+    </div>
+
+    <button class="scroll-down" onclick="scrollToNextSection()" style="position:absolute; bottom:40px; font-size:2.5rem; color:var(--accent-color); background:none; border:none; cursor:pointer; animation:bounce 1s infinite; z-index:1;">↓</button>
+  <audio id="scroll-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-fast-small-sweep-transition-166.mp3" preload="auto"></audio>
+</header>
+  
+<section id="lineup" style="min-height: 100vh; padding: 6rem 2rem; background: #0a0a0a; color: var(--text-color); display: flex; flex-direction: row; align-items: center; justify-content: center; text-align: center;">
+  <div style="max-width: 1280px;">
+    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 3rem; color: var(--primary-color); margin-bottom: 0.5rem; letter-spacing: 1px;">Kommendes Event</h2>
+    <div style="width: 60px; height: 4px; background: var(--accent-color); margin: 0 auto 2rem auto; border-radius: 4px;"></div>
+    <p style="font-size: 1.2rem; color: var(--muted-color); margin-bottom: 2rem;">Das nächste Event von UrbanTekk auf einen Blick – wir bringen dir den Bass!</p>
+    
+    <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 2rem; align-items: flex-start;">
+      <img src="https://i.imgur.com/n37IQrU.jpeg" alt="Event Flyer" style="max-width: 600px; width: 100%; border-radius: 12px; box-shadow: 0 0 20px rgba(0,255,255,0.1);">
+      <img src="https://i.imgur.com/NTU7keB.jpeg" alt="Event Lineup" style="max-width: 600px; width: 100%; border-radius: 12px; box-shadow: 0 0 20px rgba(0,255,255,0.1);">
+    </div>
+  </div>
+</section>
+
+  <section id="about" style="min-height: 100vh; padding: 6rem 2rem; background: linear-gradient(to bottom, #0a0a0a 0%, #111 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+  <div style="max-width: 1000px; text-align: center;">
+    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 3rem; color: var(--accent-color); margin-bottom: 0.5rem; letter-spacing: 1px;">Über UrbanTekk</h2>
+    <div style="width: 60px; height: 4px; background: var(--primary-color); margin: 0 auto 2rem auto; border-radius: 4px;"></div>
+    <p style="font-size: 1.2rem; color: var(--muted-color); line-height: 1.8; max-width: 700px; margin: 0 auto 2rem auto;">
+      UrbanTekk steht für kompromisslosen Bass, harte Drops und eine Show, die dich packt. <br>
+      Wir liefern dir Eventtechnik und DJ-Sets, die bleiben – live, laut und unvergesslich.
+    </p>
+    </div>
+      <div class="about-parallax-box">
+      <style>
+        .about-parallax-box {
+          margin-top: 4rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 2rem;
+          padding: 2rem;
+          background: rgba(20, 20, 20, 0.8);
+          border-radius: 16px;
+          box-shadow: 0 0 30px rgba(0,255,255,0.05);
+          max-width: 800px;
+          margin-left: auto;
+          margin-right: auto;
+          transform: scale(1);
+          transition: transform 0.5s ease;
+          will-change: transform;
+        }
+        .about-parallax-box.visible {
+          transform: scale(1.03);
+        }
+      </style>
+      <img src="https://i.imgur.com/7j1T1U2.png" alt="DJ UrbanTekk Logo" style="filter: invert(1); max-width: 240px; height: auto; border-radius: 8px; box-shadow: 0 0 20px rgba(0,255,255,0.1);" style="border-radius: 8px; max-width: 280px; height: auto; box-shadow: 0 0 20px rgba(0,255,255,0.1);">
+      <p style="font-size: 1rem; max-width: 700px; color: var(--muted-color);">
+        <strong>DJ UrbanTekk</strong> – Gründer, Technikliebhaber & Meister des Drucks. Ob Clubnacht oder Festival: Was zählt, ist Bass mit Persönlichkeit.
+      </p>
+      <ul style="list-style: none; padding: 0; color: var(--muted-color); font-size: 1rem; margin-top: 1rem;">
+        <li><i class="fas fa-star" style="color: var(--accent-color);"></i> Gegründet 2020 – direkt aus der Szene</li>
+        <li><i class="fas fa-compact-disc" style="color: var(--accent-color);"></i> 4 Events gerockt</li>
+        <li><i class="fas fa-fire" style="color: var(--accent-color);"></i> Spezialisiert auf HardTekk & Tekkno Sound</li>
+      </ul>
+      <blockquote style="font-size: 1.1rem; font-style: italic; color: var(--accent-color); margin-top: 2rem; max-width: 700px;">
+        „Wir stehen für kompromisslosen Druck, ehrlichen Sound und Technik, die dich mitreißt.“
+      </blockquote>
+    </div>
+</section>
+
+
+<section id="services" style="min-height: 100vh; padding: 6rem 2rem; background: linear-gradient(to bottom, #111 0%, #0a0a0a 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+  <div style="max-width: 1100px; text-align: center;">
+    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 3rem; color: var(--primary-color); margin-bottom: 0.5rem; letter-spacing: 1px;">Unsere Services</h2>
+    <div style="width: 60px; height: 4px; background: var(--accent-color); margin: 0 auto 2rem auto; border-radius: 4px;"></div>
+    <p style="font-size: 1.2rem; color: var(--muted-color); line-height: 1.8; max-width: 700px; margin: 0 auto 3rem auto;">
+      Von der PA-Anlage bis zur Lichtshow – UrbanTekk bietet dir ein maßgeschneidertes Technikpaket.<br>
+      Volle Kontrolle über Sound, Licht und Atmosphäre – für maximale Wirkung.
+    </p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem;">
+      <div class="service-box parallax-scroll">
+        <i class="fas fa-bolt" style="font-size: 2rem; color: var(--accent-color);"></i>
+        <h3 style="margin-top: 1rem; color: var(--primary-color);">PA-Systeme</h3>
+        <p style="font-size: 0.95rem; color: var(--muted-color);">Maximale Lautstärke und Klarheit – perfekt abgestimmt auf deine Location.</p>
+      </div>
+      <div class="service-box parallax-scroll">
+        <i class="fas fa-lightbulb" style="font-size: 2rem; color: var(--accent-color);"></i>
+        <h3 style="margin-top: 1rem; color: var(--primary-color);">Lichttechnik</h3>
+        <p style="font-size: 0.95rem; color: var(--muted-color);">Dynamische Lichteffekte für Atmosphäre, Timing und Energie im Raum.</p>
+      </div>
+      <div class="service-box parallax-scroll">
+        <i class="fas fa-headphones" style="font-size: 2rem; color: var(--accent-color);"></i>
+        <h3 style="margin-top: 1rem; color: var(--primary-color);">DJ-Service</h3>
+        <p style="font-size: 0.95rem; color: var(--muted-color);">UrbanTekk am Deck – mit echtem Gefühl für Crowd und Härtegrad.</p>
+      </div>
+      <div class="service-box parallax-scroll">
+        <i class="fas fa-sliders-h" style="font-size: 2rem; color: var(--accent-color);"></i>
+        <h3 style="margin-top: 1rem; color: var(--primary-color);">Effekte & Control</h3>
+        <p style="font-size: 0.95rem; color: var(--muted-color);">FX, Mixer, Interfaces – wir geben dir Kontrolle über den Druck.</p>
+      </div>
+      <div class="service-box parallax-scroll">
+        <i class="fas fa-truck" style="font-size: 2rem; color: var(--accent-color);"></i>
+        <h3 style="margin-top: 1rem; color: var(--primary-color);">Logistik & Aufbau</h3>
+        <p style="font-size: 0.95rem; color: var(--muted-color);">Schnell vor Ort, zügig aufgebaut – kein Stress, kein Hektik.</p>
+      </div>
+      <div class="service-box parallax-scroll">
+        <i class="fas fa-cogs" style="font-size: 2rem; color: var(--accent-color);"></i>
+        <h3 style="margin-top: 1rem; color: var(--primary-color);">Custom Pakete</h3>
+        <p style="font-size: 0.95rem; color: var(--muted-color);">Du brauchst was Eigenes? Wir bauen dein persönliches Setup.</p>
+      </div>
+    </div>
+  </div>
+</section>
+  
+<section id="contact" style="min-height: 100vh; padding: 6rem 2rem; background: linear-gradient(to bottom, #0a0a0a 0%, #111 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+  <div class="contact-box fade-in" style="max-width: 700px; background: rgba(20, 20, 20, 0.8); padding: 3rem 2rem; border-radius: 16px; box-shadow: 0 0 30px rgba(0,255,255,0.1);">
+    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 3rem; color: var(--primary-color); margin-bottom: 0.5rem;">Anfrage & Booking</h2>
+    <div style="width: 60px; height: 4px; background: var(--accent-color); margin: 0 auto 2rem auto; border-radius: 4px;"></div>
+    
+    <ul style="list-style: none; padding: 0; margin: 2rem 0; color: var(--muted-color); font-size: 1rem;">
+      <li>📅 Wunschdatum & Uhrzeit</li>
+      <li>📍 Veranstaltungsort</li>
+      <li>🔊 Technikbedarf oder Servicewunsch</li>
+    </ul>
+    <blockquote style="font-style: italic; color: var(--accent-color); font-size: 1.1rem;">„Mehr Druck, weniger Kompromisse – wir machen dein Event unvergesslich.“</blockquote>
+    <form action="mailto:urbantekk@gmx.at" method="POST" enctype="text/plain" style="margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem;">
+  <input type="text" name="Name" placeholder="Dein Name" required style="padding: 0.8rem; border-radius: 6px; border: none; background: #222; color: white;">
+  <input type="email" name="Email" placeholder="Deine E-Mail" required style="padding: 0.8rem; border-radius: 6px; border: none; background: #222; color: white;">
+  <textarea name="Nachricht" rows="4" placeholder="Worum geht’s?" required style="padding: 0.8rem; border-radius: 6px; border: none; background: #222; color: white;"></textarea>
+  <button type="submit" style="padding: 1rem; background: var(--primary-color); color: #000; border: none; font-weight: bold; border-radius: 8px; cursor: pointer;">Absenden</button>
+</form>
+<p style="margin-top: 1.5rem; color: var(--muted-color); font-size: 0.95rem;">Oder direkt per Mail: <a href="mailto:urbantekk@gmx.at" style="color: var(--accent-color); text-decoration: none; font-weight: bold;">urbantekk@gmx.at</a></p>
+    
+</section>
+
+    <section id="social" style="min-height: 80vh; padding: 6rem 2rem; background: linear-gradient(to bottom, #0a0a0a 0%, #111 100%); text-align: center;">
+  <div style="max-width: 1100px; margin: 0 auto;">
+    <h2 style="font-family: 'Orbitron', sans-serif; font-size: 3rem; color: var(--accent-color); margin-bottom: 0.5rem;">Folge UrbanTekk</h2>
+    <div style="width: 60px; height: 4px; background: var(--primary-color); margin: 0 auto 2rem auto; border-radius: 4px;"></div>
+    <p style="font-size: 1.2rem; color: var(--muted-color); margin-bottom: 3rem;">Bleib connected: Bass. Technik. Echt UrbanTekk.</p>
+
+    <!-- Social Links -->
+    <div style="display: flex; justify-content: center; gap: 2rem;">
+      <a href="https://www.instagram.com/djurbantekk" target="_blank" style="font-size: 2rem; color: var(--accent-color); transition: 0.3s;"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.youtube.com/@UrbanTekk" target="_blank" style="font-size: 2rem; color: var(--accent-color); transition: 0.3s;"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.facebook.com/profile.php?id=61564842964148" target="_blank" style="font-size: 2rem; color: var(--accent-color); transition: 0.3s;"><i class="fab fa-facebook"></i></a>
+    </div>
+  </div>
+</section>
+
+<script>
+  const hoverSound = document.getElementById('hover-sound');
+  document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('mouseenter', () => {
+      hoverSound.currentTime = 0;
+      hoverSound.play();
+    });
+  });
+    function scrollToNextSection() {
+      document.getElementById('scroll-sound').play();
+      const firstSection = document.querySelector('section');
+      if (firstSection) {
+        firstSection.scrollIntoView({ behavior: 'smooth' });
+      }
+      const flash = document.getElementById('glitch-flash');
+      flash.style.opacity = '1';
+      setTimeout(() => flash.style.opacity = '0', 100);
+    }
+
+    const nav = document.getElementById('mainNav');
+    const footer = document.getElementById('pageFooter');
+    const header = document.querySelector('header');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+        nav.classList.remove('sticky');
+        footer.classList.remove('visible');
+          
+        } else {
+        nav.classList.add('sticky');
+        footer.classList.add('visible');
+          
+        }
+      });
+    }, { threshold: 0.1 });
+    observer.observe(header);
+
+    const logo = document.querySelector(".logo-parallax");
+    document.addEventListener("mousemove", function(e) {
+      const offsetX = (e.clientX / window.innerWidth - 0.5) * 10;
+      const offsetY = (e.clientY / window.innerHeight - 0.5) * 10;
+      logo.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+    });
+
+    const slogans = [
+      "HardTekk. Laut. Echt. UrbanTekk.",
+      "Mehr Druck als dein Herz verträgt.",
+      "Sound, der dich trifft wie 'ne Wand."
+    ];
+    const sloganEl = document.getElementById('active-slogan');
+    setInterval(() => {
+      sloganEl.style.opacity = 0;
+      setTimeout(() => {
+        const next = Math.floor(Math.random() * slogans.length);
+        sloganEl.textContent = slogans[next];
+        sloganEl.style.opacity = 1;
+      }, 300);
+    }, 5000);
+
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js';
+    script.onload = () => {
+      particlesJS('particles-js', {
+        particles: {
+          number: { value: 20 },
+          size: { value: 2 },
+          color: { value: ['#ffffff', '#00ffff', '#ff007f'] },
+          opacity: {
+            value: 0.1,
+            random: true,
+            anim: { enable: true, speed: 1.2, opacity_min: 0.03, sync: false }
+          },
+          shape: { type: 'circle' },
+          line_linked: { enable: false },
+          move: { enable: true, speed: 0.3, direction: 'none', out_mode: 'out' }
+        },
+        interactivity: { events: { onhover: { enable: false }, onclick: { enable: false } } },
+        retina_detect: true
+      });
+    };
+    document.head.appendChild(script);
+    const parallaxBox = document.querySelector('.about-parallax-box');
+  const contactBox = document.querySelector('.contact-box');
+  const contactObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.3 });
+  if (contactBox) contactObserver.observe(contactBox);
+  const parallaxObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        parallaxBox.classList.add('visible');
+      } else {
+        parallaxBox.classList.remove('visible');
+      }
+    });
+  }, { threshold: 0.5 });
+  if (parallaxBox) parallaxObserver.observe(parallaxBox);
+  const scrollSound = document.getElementById('scroll-sound');
+  document.body.addEventListener('click', () => {
+    scrollSound.play().catch(() => {});
+    scrollSound.pause();
+    scrollSound.currentTime = 0;
+  }, { once: true });
+  document.querySelectorAll('.parallax-scroll').forEach(el => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        } else {
+          entry.target.classList.remove('visible');
+        }
+      });
+    }, { threshold: 0.3 });
+    observer.observe(el);
+  });
+  const sections = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('nav a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 100;
+      if (scrollY >= sectionTop) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) {
+        link.classList.add('active');
+      }
+    });
+  });
+  const logoBurst = document.querySelector('.logo-burst');
+  let triggered = false;
+  window.addEventListener('scroll', () => {
+    if (!triggered && window.scrollY > 100) {
+      logoBurst.classList.add('active');
+      triggered = true;
+      setTimeout(() => logoBurst.classList.remove('active'), 800);
+    }
+  });
+  function updateCountdown() {
+    const eventDate = new Date('2025-05-03T21:00:00');
+    const now = new Date();
+    const diff = eventDate - now;
+    if (diff <= 0) {
+      document.getElementById('countdown').textContent = 'LIVE NOW';
+      return;
+    }
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / 1000 / 60) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+    document.getElementById('countdown').textContent = `Beginn in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+  }
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+</script>
+<div id="impressum-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.9); z-index:99999; padding:4rem 2rem; overflow:auto;">
+  <div style="max-width:800px; margin:0 auto; background:#111; padding:2rem; border-radius:12px; box-shadow:0 0 20px var(--primary-color); color:var(--text-color); position:relative; animation: fadeIn 0.3s ease forwards;">
+    <button onclick="document.getElementById('impressum-modal').style.display='none'" style="position:absolute; top:1rem; right:1rem; background:none; border:none; color:var(--accent-color); font-size:1.5rem; cursor:pointer;">×</button>
+    <h2 style="font-family:'Orbitron',sans-serif; font-size:2rem; color:var(--primary-color); margin-bottom:1rem;">Impressum</h2>
+    <p style="line-height:1.6; color:var(--muted-color); font-size:0.95rem;">
+      Angaben gemäß § 5 TMG<br><br>
+      UrbanTekk<br>
+      Musterstraße 123<br>
+      12345 Musterstadt<br><br>
+      Kontakt:<br>
+      E-Mail: <a href="mailto:urbantekk@gmx.at" style="color:var(--accent-color);">urbantekk@gmx.at</a>
+    </p>
+  </div>
+</div>
+
+<div id="datenschutz-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.9); z-index:99999; padding:4rem 2rem; overflow:auto;">
+  <div style="max-width:800px; margin:0 auto; background:#111; padding:2rem; border-radius:12px; box-shadow:0 0 20px var(--accent-color); color:var(--text-color); position:relative; animation: fadeIn 0.3s ease forwards;">
+    <button onclick="document.getElementById('datenschutz-modal').style.display='none'" style="position:absolute; top:1rem; right:1rem; background:none; border:none; color:var(--accent-color); font-size:1.5rem; cursor:pointer;">×</button>
+    <h2 style="font-family:'Orbitron',sans-serif; font-size:2rem; color:var(--primary-color); margin-bottom:1rem;">Datenschutzerklärung</h2>
+    <p style="line-height:1.6; color:var(--muted-color); font-size:0.95rem;">
+      Diese Datenschutzerklärung klärt dich über die Art, den Umfang und Zweck der Verarbeitung von personenbezogenen Daten (nachfolgend kurz „Daten“) innerhalb unseres Onlineangebotes auf.<br><br>
+      <strong>Verantwortlicher</strong><br>
+      UrbanTekk<br>
+      Musterstraße 123<br>
+      12345 Musterstadt<br>
+      E-Mail: <a href="mailto:urbantekk@gmx.at" style="color:var(--accent-color);">urbantekk@gmx.at</a><br><br>
+      <strong>Verarbeitete Datenarten</strong><br>
+      – Bestandsdaten (z. B. Namen, Adressen)<br>
+      – Kontaktdaten (z. B. E-Mail, Telefonnummern)<br>
+      – Nutzungsdaten (z. B. besuchte Webseiten, Zugriffszeiten)<br>
+      – Meta-/Kommunikationsdaten (z. B. Geräte-Informationen, IP-Adressen)<br><br>
+      <strong>Zweck der Verarbeitung</strong><br>
+      – Zurverfügungstellung des Onlineangebotes<br>
+      – Beantwortung von Kontaktanfragen<br>
+      – Sicherheitsmaßnahmen<br><br>
+      <strong>Rechtsgrundlagen der Verarbeitung</strong><br>
+      Art. 6 Abs. 1 lit. a DSGVO – Einwilligung<br>
+      Art. 6 Abs. 1 lit. b DSGVO – Vertragserfüllung<br>
+      Art. 6 Abs. 1 lit. f DSGVO – berechtigte Interessen<br>
+    </p>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('footer a').forEach(link => {
+    if (link.textContent.includes('Impressum')) {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('impressum-modal').style.display = 'block';
+      });
+    }
+    if (link.textContent.includes('Datenschutz')) {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('datenschutz-modal').style.display = 'block';
+      });
+    }
+  });
+</script>
+
+<style>
+  @keyframes fadeIn {
+    0% { opacity: 0; transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+</style>
+
+<div id="cookie-banner" style="position:fixed; bottom:0; left:0; right:0; background:#111; color:#fff; padding:1rem 2rem; z-index:99999; display:flex; justify-content:space-between; align-items:center; box-shadow:0 -2px 10px rgba(0,255,255,0.2); font-size:0.95rem;">
+  <span>Diese Website verwendet Cookies, um dein Erlebnis zu verbessern.</span>
+  <button onclick="document.getElementById('cookie-banner').style.display='none'; localStorage.setItem('cookiesAccepted','true');" style="background:var(--primary-color); border:none; padding:0.5rem 1rem; color:#000; font-weight:bold; border-radius:6px; cursor:pointer;">Verstanden</button>
+</div>
+
+<script>
+  if (localStorage.getItem('cookiesAccepted')) {
+    document.addEventListener('DOMContentLoaded', () => {
+      const banner = document.getElementById('cookie-banner');
+      if (banner) banner.style.display = 'none';
+    });
+  }
+</script>
+
+$1
