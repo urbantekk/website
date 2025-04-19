@@ -63,7 +63,17 @@ document.querySelectorAll('section').forEach(el => {
     const slogans = [
       "HardTekk. Laut. Echt. UrbanTekk.",
       "Mehr Druck als dein Herz verträgt.",
-      "Sound, der dich trifft wie 'ne Wand."
+      "Sound, der dich trifft wie 'ne Wand.",
+  "Bass bis zum Herzstillstand.",
+  "Tanzfläche? Wir machen Druckfläche.",
+  "Wir liefern Sound. Du drehst durch.",
+  "HardTekk – kein Filter. Kein Kompromiss.",
+  "Nur echt mit 140 BPM+.",
+  "Wenn du’s fühlst, sind wir da.",
+  "Glitch, Druck, Gänsehaut – UrbanTekk.",
+  "Drop it harder – UrbanTekk inside.",
+  "Für die, die’s ernst meinen mit Bass.",
+  "Techno. Druck. Dreck. Direkt."
     ];
     const sloganEl = document.getElementById('active-slogan');
     setInterval(() => {
