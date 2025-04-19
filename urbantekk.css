@@ -463,4 +463,15 @@
     100% { opacity: 1; transform: scale(1); }
   }
   
+	section {
+	opacity: 0;
+	transform: translateY(60px);
+	transition: opacity 0.9s ease, transform 0.9s ease;
+	will-change: opacity, transform;
+	}
+
+	section.visible {
+	opacity: 1;
+	transform: translateY(0);
+	}
 
