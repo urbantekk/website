@@ -503,6 +503,12 @@ section.visible {
   80% { transform: translate(2px, 0px) skew(1deg); }
   100% { transform: translate(0); }
 }
+@keyframes glitchFlash {
+  0% { opacity: 1; }
+  50% { opacity: 0.8; }
+  100% { opacity: 1; }
+}
+
 @keyframes glitchRGB {
   0%   { transform: translate(0, 0); filter: invert(1) drop-shadow(0 0 3px red); }
   15%  { transform: translate(-1px, 1px); filter: invert(1) drop-shadow(0 0 4px lime); }
@@ -511,6 +517,4 @@ section.visible {
   60%  { transform: translate(1px, 1px); filter: invert(1) drop-shadow(0 0 3px yellow); }
   75%  { transform: translate(-1px, -1px); filter: invert(1) drop-shadow(0 0 6px white); }
   100% { transform: translate(0, 0); filter: invert(1) drop-shadow(0 0 3px var(--accent-color)); }
-}
-
-
+}#
