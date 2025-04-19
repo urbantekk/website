@@ -6,15 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => loader.style.display = 'none', 600);
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-  const modeToggle = document.getElementById('mode-toggle');
-  if (modeToggle) {
-    modeToggle.addEventListener('click', () => {
-      document.body.classList.toggle('club-mode');
-    });
-  }
-});
-
 
 
   const hoverSound = document.getElementById('hover-sound');
