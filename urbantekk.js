@@ -7,6 +7,14 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+document.querySelectorAll('section').forEach(el => {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      entry.target.classList.toggle('visible', entry.isIntersecting);
+    });
+  }, { threshold: 0.3 });
+  observer.observe(el);
+ });
 
   const hoverSound = document.getElementById('hover-sound');
   document.querySelectorAll('nav a').forEach(link => {
