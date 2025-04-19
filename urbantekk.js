@@ -238,6 +238,16 @@ navElement.querySelectorAll('a').forEach(link => {
     }
   });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  const modeToggle = document.getElementById('mode-toggle');
+  if (modeToggle) {
+    modeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('club-mode');
+    });
+  }
+});
+
 }
 
 
