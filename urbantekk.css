@@ -488,33 +488,3 @@ section.visible {
   80% { transform: translate(1px, 1px) scale(0.98); }
   100% { transform: translate(0, 0); }
 }
-
-.glitch-logo {
-  position: relative;
-  animation: glitchLogo 1.2s infinite steps(1, end);
-  filter: invert(1) drop-shadow(0 0 6px var(--accent-color));
-}
-
-@keyframes glitchLogo {
-  0% { transform: translate(0); }
-  20% { transform: translate(-2px, 2px) skew(-2deg); }
-  40% { transform: translate(2px, -1px) skew(2deg); }
-  60% { transform: translate(-1px, 2px) skew(-1deg); }
-  80% { transform: translate(2px, 0px) skew(1deg); }
-  100% { transform: translate(0); }
-}
-@keyframes glitchFlash {
-  0% { opacity: 1; }
-  50% { opacity: 0.8; }
-  100% { opacity: 1; }
-}
-
-@keyframes glitchRGB {
-  0%   { transform: translate(0, 0); filter: invert(1) drop-shadow(0 0 3px red); }
-  15%  { transform: translate(-1px, 1px); filter: invert(1) drop-shadow(0 0 4px lime); }
-  30%  { transform: translate(1px, -1px); filter: invert(1) drop-shadow(0 0 4px cyan); }
-  45%  { transform: translate(-2px, 2px); filter: invert(1) drop-shadow(0 0 6px magenta); }
-  60%  { transform: translate(1px, 1px); filter: invert(1) drop-shadow(0 0 3px yellow); }
-  75%  { transform: translate(-1px, -1px); filter: invert(1) drop-shadow(0 0 6px white); }
-  100% { transform: translate(0, 0); filter: invert(1) drop-shadow(0 0 3px var(--accent-color)); }
-}#
