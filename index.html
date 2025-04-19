@@ -2,6 +2,8 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+  <title>UrbanTekk – HardTekk Events & Eventtechnik</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4wyt1JcL2vCILqUVyTAgcY9vsD1DUNeGzN5C8XPrvoXj5T+E6c+M34B0soq+n3g6KZg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="UrbanTekk liefert kompromisslosen Bass, Eventtechnik und DJ-Sets mit Persönlichkeit. Hart. Laut. Echt.">
@@ -480,8 +482,11 @@ document.addEventListener('DOMContentLoaded', () => {
   </nav>
 
   <button id="burger-toggle" style="display: none; position: fixed; top: 1rem; right: 1rem; background: none; border: none; color: var(--accent-color); font-size: 2rem; z-index: 1001; cursor: pointer;">
-    ☰
-    </button>
+  ☰
+</button>
+<button id="close-nav" style="display: none; position: fixed; top: 1rem; right: 1rem; background: none; border: none; color: var(--primary-color); font-size: 2rem; z-index: 1002; cursor: pointer;">
+  ✖
+</button>
 
   <footer id="pageFooter" style="position: fixed; bottom: 0; left: 0; right: 0; background: #000; padding: 0.5rem 1rem; text-align: center; z-index: 1000; color: var(--muted-color); transition: transform 0.6s ease;">
   
@@ -917,7 +922,15 @@ if (burgerToggle && navElement && headerElement) {
   burgerObserver.observe(headerElement);
 
   burgerToggle.addEventListener('click', () => {
-  navElement.classList.toggle('open');
+  navElement.classList.add('open');
+  burgerToggle.style.display = 'none';
+  document.getElementById('close-nav').style.display = 'block';
+});
+
+document.getElementById('close-nav').addEventListener('click', () => {
+  navElement.classList.remove('open');
+  burgerToggle.style.display = 'block';
+  document.getElementById('close-nav').style.display = 'none';
 });
 
 // Menü automatisch schließen bei Klick auf einen Link (nur mobil)
@@ -925,6 +938,8 @@ navElement.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => {
     if (window.innerWidth <= 768 && navElement.classList.contains('open')) {
       navElement.classList.remove('open');
+      burgerToggle.style.display = 'block';
+      document.getElementById('close-nav').style.display = 'none';
     }
   });
 });
