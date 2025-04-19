@@ -1,0 +1,1 @@
+// Hier steht dein gesamter JavaScript-Code aus <script>
