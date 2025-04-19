@@ -178,13 +178,17 @@
       padding: 1rem;
     }
     nav.open {
-      display: flex;
-      position: fixed;
-      top: 60px;
-      left: 0;
-      right: 0;
-      z-index: 999;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  background: #000;
+  padding: 1rem;
+  z-index: 999;
+}
   }
   #burger-toggle {
   display: none;
@@ -910,11 +914,18 @@ if (burgerToggle && navElement && headerElement) {
   burgerObserver.observe(headerElement);
 
   burgerToggle.addEventListener('click', () => {
-    navElement.classList.toggle('open');
+  navElement.classList.toggle('open');
+});
+
+// Menü automatisch schließen bei Klick auf einen Link (nur mobil)
+navElement.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    if (window.innerWidth <= 768 && navElement.classList.contains('open')) {
+      navElement.classList.remove('open');
+    }
   });
+});
 }
 
 
 </script>
-
-$1
