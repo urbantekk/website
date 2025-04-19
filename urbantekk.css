@@ -1,1 +1,464 @@
-/* Hier steht dein gesamter CSS-Code aus <style> */
+
+  /* ================================ */
+  /* 🔧 Root & Reset                 */
+  /* ================================ */
+  :root {
+    --primary-color: #ff007f;
+    --accent-color: #00ffff;
+    --bg-color: #0a0a0a;
+    --text-color: #fff;
+    --muted-color: #999;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  /* ================================ */
+  /* 🎛️ Header                       */
+  /* ================================ */
+  header {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    background: url('https://images.unsplash.com/photo-1618379349570-c6f366f45e7a?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+  }
+  .logo-parallax {
+    max-width: 25vw;
+    filter: invert(1);
+    z-index: 2;
+    transition: transform 0.1s ease;
+    position: relative;
+    animation: logoFlash 4s infinite ease-in-out, flickerScan 0.15s infinite;
+  }
+  .header-glow {
+    position: absolute;
+    width: 60vw;
+    height: 60vw;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%);
+    opacity: 0.05;
+    z-index: 0;
+    filter: blur(60px);
+    animation: glowPulse 5s infinite ease-in-out;
+  }
+  .slogan-container {
+    margin-top: 1rem;
+    z-index: 2;
+    position: relative;
+  }
+  .slogan {
+    font-size: 1.5rem;
+    color: var(--muted-color);
+    opacity: 1;
+    text-align: center;
+    font-style: italic;
+    transition: opacity 0.5s ease;
+  }
+
+  /* ================================ */
+  /* 🔦 Glitch & Visual FX           */
+  /* ================================ */
+  #glitch-flash {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: white;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transition: opacity 0.1s;
+  }
+  #noise, #particles-js {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+  }
+  #noise {
+    background: url('https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif') repeat;
+    background-size: cover;
+    mix-blend-mode: overlay;
+    opacity: 0.04;
+  }
+
+  /* ================================ */
+  /* 🧭 Navigation & Footer          */
+  /* ================================ */
+  nav {
+    position: fixed;
+    top: -100px;
+    left: 0;
+    right: 0;
+    background: #000;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--accent-color);
+    box-shadow: 0 4px 20px rgba(0,255,255,0.1);
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 1rem;
+    z-index: 1000;
+    transition: top 0.3s ease;
+  }
+  nav.sticky { top: 0; }
+  nav a {
+    position: relative;
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+  nav a:hover { color: var(--primary-color); }
+  nav a::after {
+    content: '';
+    position: absolute;
+    width: 0%; height: 2px; bottom: -4px; left: 0;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+  }
+  nav a:hover::after { width: 100%; }
+  nav a.active {
+    color: var(--primary-color);
+    font-weight: bolder;
+  }
+  nav a.glitch {
+    display: inline-block;
+    animation: glitchText 1.2s infinite;
+  }
+  .nav-cta {
+    padding: 0.5rem 1.2rem;
+    margin-left: 0.5rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 6px;
+    color: var(--primary-color);
+    background-color: transparent;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+  }
+  .nav-cta:hover {
+    background-color: var(--primary-color);
+    color: #000;
+    box-shadow: 0 0 12px var(--primary-color);
+  }
+  @media (max-width: 768px) {
+    nav {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      background: #000;
+      padding: 1rem;
+    }
+    nav.open {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  top: 0rem;
+  left: 0;
+  right: 0;
+  background: #000;
+  padding: 1rem 0.5rem;
+  z-index: 1002;
+  box-shadow: 0 8px 20px rgba(0, 255, 255, 0.15);
+  border-bottom: 1px solid var(--accent-color);
+}
+  }
+  #burger-toggle {
+  display: none;
+}
+@media (max-width: 768px) {
+  #burger-toggle {
+    display: none;
+  }
+  body:not(.header-visible) #burger-toggle {
+    display: block;
+  }
+}
+  footer {
+    border-top: 1px solid var(--accent-color);
+    box-shadow: 0 -4px 20px rgba(0,255,255,0.1);
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: #000;
+    padding: 1rem;
+    text-align: center;
+    z-index: 1000;
+    color: var(--muted-color);
+    transform: translateY(100%);
+    transition: transform 0.6s ease;
+  }
+  footer.visible { transform: translateY(0); }
+
+  /* ================================ */
+  /* 💎 Components                   */
+  /* ================================ */
+  .service-box {
+    background: #111;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(255,255,255,0.05);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    will-change: transform;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .service-box:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 0 25px rgba(0,255,255,0.3);
+  }
+  .parallax-scroll {
+    transform: translateY(0);
+    transition: transform 0.6s ease-out;
+  }
+  .parallax-scroll.visible {
+    transform: translateY(-10px);
+  }
+  .glitch-text {
+    position: relative;
+    display: inline-block;
+    animation: glitchText 1.2s infinite;
+    z-index: 1001;
+  }
+  .hover-bounce:hover {
+    text-shadow: 0 0 12px var(--primary-color);
+    animation: bounce 0.4s ease;
+  }
+
+  /* ================================ */
+  /* 📺 Animation Keyframes          */
+  /* ================================ */
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
+  }
+  @keyframes glowPulse {
+    0%, 100% { opacity: 0.1; transform: scale(1); }
+    50% { opacity: 0.25; transform: scale(1.05); }
+  }
+  @keyframes glitchText {
+    0% { text-shadow: 1px 0 red, -1px 0 blue; }
+    20% { text-shadow: 2px 2px #00ffff, -2px -2px #ff007f; }
+    40% { text-shadow: -1px 0 #ff007f, 1px 0 #00ffff; }
+    60% { text-shadow: 0 0 2px #fff; }
+    80% { text-shadow: 1px 0 red, -1px 0 blue; }
+    100% { text-shadow: none; }
+  }
+  @keyframes logoFlash {
+    0%, 100% { filter: invert(1) drop-shadow(0 0 12px var(--accent-color)); }
+    50% { filter: invert(1) drop-shadow(0 0 20px var(--primary-color)); }
+  }
+  @keyframes flickerScan {
+    0% { opacity: 0.95; transform: scaleY(1); }
+    5% { opacity: 0.8; transform: scaleY(1.02); }
+    10% { opacity: 0.9; transform: scaleY(1); }
+    15% { opacity: 0.7; transform: scaleY(1.03); }
+    20%, 100% { opacity: 1; transform: scaleY(1); }
+  }
+
+  /* ================================ */
+  /* 🎛️ Live-Banner                 */
+  /* ================================ */
+  .live-banner {
+    position: absolute;
+    top: 1.2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid var(--accent-color);
+    border-radius: 8px;
+    padding: 1rem 2rem;
+    min-width: 60vw;
+    z-index: 2000;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--accent-color);
+    text-align: center;
+    text-shadow: 0 0 6px var(--accent-color), 0 0 12px var(--primary-color);
+  }
+  .live-banner .live-text {
+    margin: 0;
+    padding: 0;
+    line-height: 1.4;
+  }
+  
+
+  /* ================================ */
+  /* 📱 Responsive (Mobile Ready)    */
+  /* ================================ */
+  @media (max-width: 768px) {
+    /* 🔧 Responsive Header Layout */
+    .logo-parallax {
+      max-width: 70vw;
+      margin-bottom: 1.5rem;
+    }
+    .slogan-container {
+      padding: 0 1rem;
+    }
+    .slogan {
+      font-size: 1.1rem;
+      padding: 0.5rem 0;
+    }
+
+    /* 🔧 Navigation Anpassung */
+    nav {
+      flex-direction: column;
+      align-items: center;
+    }
+    nav a, .nav-cta {
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
+
+    /* 🔧 Live-Banner */
+    .live-banner {
+      width: 90vw;
+      padding: 0.8rem 1rem;
+      font-size: 1rem;
+    }
+
+    /* 🔧 Services Grid besser stapeln */
+    .service-box {
+      min-width: 100%;
+    }
+
+    /* 🔧 Footer optimieren */
+    footer p {
+      font-size: 0.75rem;
+    }
+
+    /* 🔧 Kontaktformular sauberer */
+    .contact-box input,
+    .contact-box textarea {
+      font-size: 1rem;
+    }
+    header {
+      height: auto;
+      padding: 5rem 1rem 3rem 1rem;
+    }
+    .logo-parallax {
+      max-width: 85vw;
+    }
+    .slogan {
+      font-size: 1.3rem;
+      color: var(--accent-color);
+      text-shadow: 0 0 6px var(--primary-color);
+    }
+    .live-banner {
+      min-width: 95vw;
+      font-size: 1.3rem;
+      padding: 1.4rem 1.2rem;
+      text-align: center;
+      line-height: 1.6;
+    }
+    header {
+      height: 120vh;
+      padding-top: 2rem;
+    }
+    .live-banner {
+      min-width: 95vw;
+      font-size: 1.1rem;
+      padding: 1rem 1.2rem;
+    }
+    .logo-parallax {
+      max-width: 70vw;
+    }
+    nav {
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 0.8rem 1rem;
+    }
+    nav a {
+      font-size: 0.9rem;
+    }
+    .nav-cta {
+      margin-left: 0;
+      width: 100%;
+      justify-content: center;
+    }
+    .logo-parallax {
+      max-width: 60vw;
+    }
+    .slogan {
+      font-size: 1.1rem;
+      padding: 0 1rem;
+    }
+    .live-banner {
+      min-width: 90vw;
+      font-size: 0.9rem;
+      padding: 0.8rem 1rem;
+    }
+    section {
+      padding: 4rem 1rem;
+    }
+    .about-parallax-box,
+    .contact-box {
+      padding: 2rem 1.2rem;
+    }
+    .service-box {
+      padding: 1.5rem 1rem;
+    }
+    .service-box h3 {
+      font-size: 1.1rem;
+    }
+    .service-box p {
+      font-size: 0.9rem;
+    }
+    footer p {
+      font-size: 0.75rem;
+    }
+    #lineup div {
+      flex-direction: column !important;
+      align-items: center;
+    }
+    #lineup img {
+      max-width: 90vw !important;
+    }
+  }
+
+
+
+        .about-parallax-box {
+          margin-top: 4rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 2rem;
+          padding: 2rem;
+          background: rgba(20, 20, 20, 0.8);
+          border-radius: 16px;
+          box-shadow: 0 0 30px rgba(0,255,255,0.05);
+          max-width: 800px;
+          margin-left: auto;
+          margin-right: auto;
+          transform: scale(1);
+          transition: transform 0.5s ease;
+          will-change: transform;
+        }
+        .about-parallax-box.visible {
+          transform: scale(1.03);
+        }
+      
+
+
+  @keyframes fadeIn {
+    0% { opacity: 0; transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1); }
+  }
