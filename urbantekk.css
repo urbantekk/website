@@ -462,7 +462,16 @@
     0% { opacity: 0; transform: scale(0.95); }
     100% { opacity: 1; transform: scale(1); }
   }
+  
+	section {
+	opacity: 0;
+	transform: translateY(60px);
+	transition: opacity 0.9s ease, transform 0.9s ease;
+	will-change: opacity, transform;
+	}
 
-body.club-mode .animated-icon {
-  stroke: var(--primary-color);
-}
+	section.visible {
+	opacity: 1;
+	transform: translateY(0);
+	}
+
